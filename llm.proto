@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package llm;
+
+service LLMService {
+    rpc SetAPIKey(SetAPIKeyRequest) returns (SetAPIKeyResponse);
+    rpc ChatStream (ChatRequest) returns (stream ChatResponse);
+}
+
+enum ModelType {
+    MODEL_TYPE_UNSPECIFIED = 0;
+    OPENAI = 1;
+    ANTHROPIC = 2;
+    OLLAMA = 3;
+    GEMINI = 4;
+}
+
+message SetAPIKeyRequest {
+  ModelType model_type = 1; 
+  string api_key = 2;
+}
+
+message SetAPIKeyResponse {
+  bool success = 1;
+}
+
+message ChatRequest {
+  string session_id = 1;
+  string request_id = 2;
+  string query = 3;
+  string model = 4;
+  string task = 5;
+  ModelType model_type = 6; 
+}
+
+message ChatResponse {
+  string session_id = 1;
+  string request_id = 2;
+  string content = 3;
+  ModelType model_type = 4;   
+  bool done = 5;
+}

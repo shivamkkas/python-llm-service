@@ -1,0 +1,40 @@
+LOG:
+  LOG_CONSOLE_ENABLED: true
+  LOG_FILE: log/app.log
+  LOG_FILE_LEVEL: INFO
+  LOG_LEVEL: INFO
+  LOG_MAX_BACKUPS: 7
+  ROTATION:
+    type: size
+    when: midnight
+    interval: 1          # every 1 day
+    backupCount: 7       # keep 7 backup files
+    
+setting:
+  MAX_WORKER: 10
+  MAX_MESSAGE_LENGTH: 100 #MB
+
+models:
+  anthropic:
+    enable: true
+    base_url: "https://api.anthropic.com"  
+
+  ollama:
+    enable: true
+    base_url: "http://192.168.1.17:11436"
+
+  openai:
+    enable: false
+    base_url: "https://api.openai.com/v1"
+
+  gemini:
+    enable: false
+    base_url: "https://generativelanguage.googleapis.com"
+
+  mcp:
+    enable: true
+    base_url: "http://127.0.0.1:8000/mcp"
+
+server:
+  host: "0.0.0.0"
+  port: "50054"
